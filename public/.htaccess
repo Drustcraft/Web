@@ -1,0 +1,21 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Ensure we are in https
+  #RewriteCond %{HTTPS} !=on
+  #RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+
+  RewriteRule ^index\.html$ - [L]
+
+  # Ignore the api directory
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} ^/api
+  RewriteRule ^(.*)$ $1.php [L,QSA]
+
+  # Pass everything to vue.js
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule . /index.html [L]
+</IfModule>
