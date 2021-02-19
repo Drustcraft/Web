@@ -18,8 +18,24 @@ export default {
     }
   },
   methods: {
-    setSessionId(id) {
-      this.sessionId = id
+    fetch: function (path, options, callback) {
+      let requestOptions = {
+        method: 'POST',
+      }
+
+      if (options != null) {
+        requestOptions['headers'] = { 'Content-Type': 'application/json' }
+        requestOptions['body'] = JSON.stringify(options)
+      }
+
+      fetch('http://drustcraftq.test/api/' + path, requestOptions)
+        .then(response => response.json())
+        .then(data => {
+          callback(data)
+        })
+        .catch(function () {
+          callback(null)
+        })
     },
   },
 }
