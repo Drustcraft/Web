@@ -85,4 +85,36 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss">
+.statusbar {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding: 0.5rem 1rem;
+  color: #ccc;
+
+  .statusbar-left {
+    flex: 50%;
+  }
+
+  .statusbar-right {
+    flex: 50%;
+    text-align: right;
+  }
+
+  i {
+    margin: 0 0.5rem;
+  }
+
+  h4,
+  h4 a {
+    color: #efba4d;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0;
+  }
+
+  p {
+    margin: 0 0.5rem;
+  }
+}
+</style>
