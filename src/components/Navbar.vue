@@ -39,14 +39,13 @@ export default {
     NavbarItem,
   },
   created: function () {
-    const requestOptions = {
-      method: 'POST',
-    }
-    fetch('http://drustcraftq.test/api/navbar', requestOptions)
-      .then(response => response.json())
-      .then(data => {
-        this.navitems = data
-      })
+    var self = this
+
+    this.$parent.fetch('navbar', null, function (data) {
+      if (data != null) {
+        self.navitems = data
+      }
+    })
   },
 }
 </script>
