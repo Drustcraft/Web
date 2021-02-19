@@ -76,11 +76,13 @@ export default {
     },
   },
   created: function () {
-    fetch('http://drustcraftq.test/api/status')
-      .then(response => response.json())
-      .then(data => {
-        this.players = data['players']
-      })
+    var self = this
+
+    this.$root.fetch('status', null, function (data) {
+      if (data != null) {
+        self.players = data['players']
+      }
+    })
   },
 }
 </script>
