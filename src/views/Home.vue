@@ -1,7 +1,13 @@
 <template>
-  <div class="home"></div>
+  <status-bar />
 </template>
 
 <script>
-export default {}
+import StatusBar from '@/components/StatusBar'
+
+export default {
+  components: {
+    StatusBar,
+  },
+}
 </script>
