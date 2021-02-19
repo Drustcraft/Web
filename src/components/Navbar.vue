@@ -16,13 +16,10 @@
 
       <div class="navbar-collapse collapse col-lg-3">
         <ul class="navbar-nav ml-auto text-right">
-          <li v-if="this.$parent.sessionId == ''">
-            <router-link to="/login">Login</router-link>
-          </li>
-          <li>X={{ this.$parent.sessionId }}</li>
-          <li v-if="this.$parent.sessionId != ''">
-            <router-link to="/logout">Logout</router-link>
-          </li>
+          <li v-if="this.$parent.sessionId == ''"><router-link to="/register">Register</router-link></li>
+          <li v-if="this.$parent.sessionId == ''"><router-link to="/login">Login</router-link></li>
+          <li v-if="this.$parent.sessionId != ''"><router-link to="/account">My Account</router-link></li>
+          <li v-if="this.$parent.sessionId != ''"><router-link to="/logout">Logout</router-link></li>
         </ul>
       </div>
     </div>
@@ -44,8 +41,6 @@ export default {
   created: function () {
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ idle: 'Rough' }),
     }
     fetch('http://drustcraftq.test/api/navbar', requestOptions)
       .then(response => response.json())
