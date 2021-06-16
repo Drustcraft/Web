@@ -1,49 +1,37 @@
 <template>
-  <Navbar />
-  <router-view />
+  <div id="app">
+    <AppHeader />
+    <div id="page">
+      <transition name="fade" mode="out-in">
+        <router-view />
+      </transition>
+    </div>
+    <AppFooter />
+  </div>
 </template>
 
 <script>
-// Test here
-import Navbar from '@/components/Navbar.vue'
-import Footer from '@/components/Footer.vue'
+import AppHeader from "@/components/AppHeader.vue";
+import AppFooter from "@/components/AppFooter.vue";
+import { setInteractionMode } from "vee-validate";
 
 export default {
   components: {
-    Navbar,
-    Footer,
+    AppHeader,
+    AppFooter,
   },
-  data: function () {
-    return {
-      sessionId: '',
-    }
+  mounted: function () {
+    setInteractionMode("passive");
   },
-  methods: {
-    fetch: function (path, options, callback) {
-      let requestOptions = {
-        method: 'POST',
-      }
-
-      if (options != null) {
-        requestOptions['headers'] = { 'Content-Type': 'application/json' }
-        requestOptions['body'] = JSON.stringify(options)
-      }
-
-      fetch('http://drustcraftq.test/api/' + path, requestOptions)
-        .then(response => response.json())
-        .then(data => {
-          callback(data)
-        })
-        .catch(function () {
-          callback(null)
-        })
-    },
-  },
-}
+};
 </script>
 
 <style lang="scss">
-@import 'node_modules/bootswatch/dist/darkly/variables';
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import 'node_modules/bootswatch/dist/darkly/bootswatch';
+@import "styles/normalize.css";
+@import "~bulma/sass/utilities/_all";
+@import "styles/variables.scss";
+@import "~bulma";
+@import "styles/global.scss";
+@import "~buefy/src/scss/buefy";
+@import "styles/animation.scss";
 </style>

@@ -1,13 +1,15 @@
 <template>
-  <status-bar />
+  <transition name="fade" mode="out-in">
+    <router-view />
+  </transition>
 </template>
 
 <script>
-import StatusBar from '@/components/StatusBar'
-
 export default {
-  components: {
-    StatusBar,
+  mounted: async function () {
+    await this.$store.dispatch("verifyToken");
   },
-}
+};
 </script>
+
+<style lang="scss"></style>

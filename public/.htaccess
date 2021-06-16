@@ -1,21 +1,23 @@
+Options +FollowSymLinks -MultiViews
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # Ensure we are in https
-  #RewriteCond %{HTTPS} !=on
-  #RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R,L]
+  # Force HTTPS
+  RewriteCond %{HTTPS} off 
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
-  RewriteRule ^index\.html$ - [L]
+  # Force www.drustcraft.com.au
+  RewriteCond %{HTTP_HOST} ^drustcraft\.com\.au [NC]
+  RewriteRule (.*) https://www.drustcraft.com.au/$1 [R=301,L]
 
-  # Ignore the api directory
-  RewriteCond %{REQUEST_FILENAME} !-f
+  # Append .php to files if that file exists
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond %{REQUEST_URI} ^/api
-  RewriteRule ^(.*)$ $1.php [L,QSA]
+  RewriteCond %{REQUEST_FILENAME}.php -f
+  RewriteRule ^ %{REQUEST_URI}.php [L]
 
-  # Pass everything to vue.js
-  RewriteCond %{REQUEST_FILENAME} !-f
+  # Send all other requests to vuejs
   RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
   RewriteRule . /index.html [L]
 </IfModule>

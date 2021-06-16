@@ -1,0 +1,97 @@
+$body-background-color: rgb(19,10,8);
+$text: rgba(255,255,255,0.5);
+$family-sans-serif: "Open Sans", Arial,Helvetica,sans-serif;
+
+$primary: #E8B933;
+$primary-light: findLightColor($primary);
+$primary-dark: findDarkColor($primary);
+$primary-invert: findColorInvert($primary);
+$custom-colors: null !default;
+
+$colors: mergeColorMaps(
+  (
+    "white": (
+      $white,
+      $black,
+    ),
+    "black": (
+      $black,
+      $white,
+    ),
+    "light": (
+      $light,
+      $light-invert,
+    ),
+    "dark": (
+      $dark,
+      $dark-invert,
+    ),
+    "primary": (
+      $primary,
+      $primary-invert,
+      $primary-light,
+      $primary-dark,
+    ),
+    "link": (
+      $link,
+      $link-invert,
+      $link-light,
+      $link-dark,
+    ),
+    "info": (
+      $info,
+      $info-invert,
+      $info-light,
+      $info-dark,
+    ),
+    "success": (
+      $success,
+      $success-invert,
+      $success-light,
+      $success-dark,
+    ),
+    "warning": (
+      $warning,
+      $warning-invert,
+      $warning-light,
+      $warning-dark,
+    ),
+    "danger": (
+      $danger,
+      $danger-invert,
+      $danger-light,
+      $danger-dark,
+    ),
+  ),
+  $custom-colors
+);
+
+
+// $modal-background-background-color: rgba(34,34,34);
+$modal-card-head-background-color: rgba(34,34,34);
+$modal-card-title-color: rgba(255,255,255,0.8);
+$modal-card-body-background-color: rgba(34,34,34);
+$modal-card-head-border-bottom: 0;
+$modal-card-foot-border-top: 0;
+$modal-card-head-padding: 2rem;
+$modal-card-body-padding: 2rem;
+
+$label-color: $text;
+
+$input-color: rgba(204,204,204);
+$input-border-color: rgba(14,14,14);
+$input-background-color: rgba(24,24,24);
+
+$toast-opacity: 1;
+$toast-box-shadow: 0 0 20px 4px rgba(0, 0, 0, 1);
+
+$loading-background: rgba(0,0,0,0.9);
+// $loading-background-legacy: #130A08;
+$loading-icon-size: 5rem;
+$loading-full-page-icon-size: 5rem;
+
+$strong-color: #fff;
+
+$content-blockquote-background-color: #333;
+
+$skeleton-background:	linear-gradient(90deg, rgba(48, 30, 27, 0.1) 25%, rgba(48, 30, 27, 1) 50%, rgba(48, 30, 27, 0.1) 75%);
