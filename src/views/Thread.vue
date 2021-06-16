@@ -35,31 +35,33 @@
             : {},
         ]"
       >
-        <div>
-          <h3>{{ thread.title }}</h3>
-        </div>
-        <div>
-          <ul class="thread-info">
-            <li>
-              <img
-                :src="
-                  'https://mc-heads.net/avatar/' +
-                  thread.player_uuid +
-                  '/16/nohelm.png'
-                "
-              />
-              {{ thread.player_name }}
-            </li>
-            <li>
-              <i class="fas fa-clock"></i>{{ relativeDate(thread.created) }}
-            </li>
-            <li v-if="thread.locked">
-              <i class="fas fa-lock"></i>Thread is Locked
-            </li>
-            <li v-if="thread.pinned">
-              <i class="fas fa-thumbtack"></i>Thread is Pinned
-            </li>
-          </ul>
+        <div class="thread-banner-text">
+          <div>
+            <h3>{{ thread.title }}</h3>
+          </div>
+          <div>
+            <ul class="thread-info">
+              <li>
+                <img
+                  :src="
+                    'https://mc-heads.net/avatar/' +
+                    thread.player_uuid +
+                    '/16/nohelm.png'
+                  "
+                />
+                {{ thread.player_name }}
+              </li>
+              <li>
+                <i class="fas fa-clock"></i>{{ relativeDate(thread.created) }}
+              </li>
+              <li v-if="thread.locked">
+                <i class="fas fa-lock"></i>Thread is Locked
+              </li>
+              <li v-if="thread.pinned">
+                <i class="fas fa-thumbtack"></i>Thread is Pinned
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div class="thread-options">
@@ -789,14 +791,25 @@ export default {
       background-position: center;
       background-size: cover;
       border-bottom: 1px solid #999;
-  
-      h3,
-      .thread-info {
-        background-color: rgba(0, 0, 0, 0.7);
-        border-radius: 1rem;
-        box-shadow: -20px 0 10px 8px rgba(0, 0, 0, 0.7),
-          20px 0 10px 8px rgba(0, 0, 0, 0.7);
+
+      .thread-banner-text {
+        // border: 1px solid red;
+        display: inline-block;
+        border-top-right-radius: 10rem;
+        border-bottom-right-radius: 10rem;
+        margin-left: -2.5rem;
+        padding: 0.25rem 8rem 0 4rem;
+        background-color: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.8);
       }
+  
+      // h3,
+      // .thread-info {
+      //   background-color: rgba(0, 0, 0, 0.7);
+      //   border-radius: 1rem;
+      //   box-shadow: -20px 0 10px 8px rgba(0, 0, 0, 0.7),
+      //     20px 0 10px 8px rgba(0, 0, 0, 0.7);
+      // }
     }
   
     .thread-info {

@@ -51,8 +51,10 @@
               '\')',
           }"
         >
-          <div class="news-item-date">{{ getNewsItem(0, "created") }}</div>
-          <div class="news-item-title">{{ getNewsItem(0, "title") }}</div>
+          <div class="news-item-info">
+            <div class="news-item-date">{{ getNewsItem(0, "created") }}</div>
+            <div class="news-item-title">{{ getNewsItem(0, "title") }}</div>
+          </div>
         </router-link>
       </div>
       <div class="news-item">
@@ -66,8 +68,10 @@
               '\')',
           }"
         >
-          <div class="news-item-date">{{ getNewsItem(1, "created") }}</div>
-          <div class="news-item-title">{{ getNewsItem(1, "title") }}</div>
+          <div class="news-item-info">
+            <div class="news-item-date">{{ getNewsItem(1, "created") }}</div>
+            <div class="news-item-title">{{ getNewsItem(1, "title") }}</div>
+          </div>
         </router-link>
       </div>
       <div class="news-item">
@@ -81,8 +85,10 @@
               '\')',
           }"
         >
-          <div class="news-item-date">{{ getNewsItem(2, "created") }}</div>
-          <div class="news-item-title">{{ getNewsItem(2, "title") }}</div>
+          <div class="news-item-info">
+            <div class="news-item-date">{{ getNewsItem(2, "created") }}</div>
+            <div class="news-item-title">{{ getNewsItem(2, "title") }}</div>
+          </div>
         </router-link>
       </div>
       <div class="news-item">
@@ -96,8 +102,10 @@
               '\')',
           }"
         >
-          <div class="news-item-date">{{ getNewsItem(3, "created") }}</div>
-          <div class="news-item-title">{{ getNewsItem(3, "title") }}</div>
+          <div class="news-item-info">
+            <div class="news-item-date">{{ getNewsItem(3, "created") }}</div>
+            <div class="news-item-title">{{ getNewsItem(3, "title") }}</div>
+          </div>
         </router-link>
       </div>
     </div>
@@ -333,12 +341,15 @@ export default {
         border-color: #e2a233;
       }
 
+      .news-item-info {
+        background-color: rgba(0, 0, 0, 0.7);
+        box-shadow: 0 -5px 5px 5px rgba(0, 0, 0, 0.7);
+      }
+
       .news-item-date {
         color: #ddd;
         font-size: 0.9rem;
         padding: 0 1.5rem;
-        background-color: rgba(0, 0, 0, 0.7);
-        box-shadow: 0 -5px 5px 5px rgba(0, 0, 0, 0.7);
       }
 
       .news-item-title {
@@ -346,7 +357,6 @@ export default {
         font-weight: bold;
         font-size: 1.2rem;
         padding: 0 1.5rem 1rem 1.5rem;
-        background-color: rgba(0, 0, 0, 0.7);
       }
     }
   }
