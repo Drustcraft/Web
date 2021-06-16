@@ -315,6 +315,7 @@ ul.dash {
 
 .header.maintenance + #page .page-content-sidebar .hamburger-outer {
   top: 7.5rem;
+  z-index: 2;
 }
 
 .button-group {
