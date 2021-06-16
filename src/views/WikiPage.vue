@@ -123,16 +123,30 @@ export default {
     },
 
     editPage: function () {
+      if(!this.page) {
+        this.page = {
+          title: '',
+          content: ''
+        };
+      }
+      
       this.editing = true;
-      this.$nextTick(function () {
-        this.$refs["editor"].editor.commands.setContent(
-          JSON.parse(this.page.content)
-        );
+      
+      this.$nextTick(function() {
+        if(this.page.content != '') {
+          this.$refs["editor"].editor.commands.setContent(
+            JSON.parse(this.page.content)
+          );
+        }
       });
     },
 
     cancelEdit: function () {
       this.editing = false;
+      
+      if(this.page.title == '' && this.page.content == '') {
+        this.page = null;
+      }
     },
 
     onSubmit: function () {
@@ -177,13 +191,17 @@ export default {
     },
 
     output: function (json) {
-      let html = linkify(toHTML(json));
-
-      html = html.replace(/\[\[(.+?)\]\]/g, function (match, contents) {
-        return '<a href="/wiki/' + contents + '">' + contents + "</a>";
-      });
-
-      return html;
+      if(json != '') {
+        let html = linkify(toHTML(json));
+  
+        html = html.replace(/\[\[(.+?)\]\]/g, function (match, contents) {
+          return '<a href="/wiki/' + contents + '">' + contents + "</a>";
+        });
+  
+        return html;
+      } else {
+        return '';
+      }
     },
   },
 };
