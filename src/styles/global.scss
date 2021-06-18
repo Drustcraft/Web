@@ -170,7 +170,18 @@ ul.dash {
   }
 }
 
-.ProseMirror {
+.ProseMirror, #page .posts .post .post-main .post-content {
+  ul {
+    list-style: disc;
+  }
+  
+  ul, ol {
+    margin-left: 2rem;
+    
+    p {
+      margin-bottom: 0;
+    }
+  }
 }
 
 
