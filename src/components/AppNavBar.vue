@@ -281,7 +281,8 @@ export default {
 
   .nav-item {
     background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    color: transparent;
     background-image: -webkit-linear-gradient(
       top,
       #efd100,
