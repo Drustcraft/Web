@@ -236,6 +236,9 @@ export default {
       .latest-post-thread {
         grid-area: 1 / 2 / 1 / 2;
         font-size: 0.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
 
       .latest-post-details {
