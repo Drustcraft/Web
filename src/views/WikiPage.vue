@@ -168,8 +168,8 @@ export default {
             position: "is-top-right",
           });
         })
-        .catch((error) => {
-          alert(error);
+        .catch((/* error */) => {
+          // alert(error);
         })
         .finally(() => {
           this.loading = false;

@@ -124,8 +124,8 @@ export default {
           // TODO no forums found
         }
       })
-      .catch((error) => {
-        alert(error);
+      .catch((/*error*/) => {
+        // alert(error);
       })
       .finally(() => {
         loadingComponent.close();

@@ -162,8 +162,8 @@ export default {
       .then((response) => {
         this.news = response.data.threads;
       })
-      .catch((error) => {
-        alert("ERR: " + JSON.stringify(error));
+      .catch((/*error*/) => {
+        // alert("ERR: " + JSON.stringify(error));
       });
   },
   methods: {

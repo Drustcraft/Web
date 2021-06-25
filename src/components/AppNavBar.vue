@@ -100,7 +100,6 @@ export default {
           target.style.removeProperty("overflow");
           target.style.removeProperty("transition-duration");
           target.style.removeProperty("transition-property");
-          //alert("!");
         }, duration);
       };
 
