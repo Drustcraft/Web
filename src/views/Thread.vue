@@ -171,11 +171,10 @@
           </div>
           <div class="post-author-groups">
             <div
-              :class="'post-author-group-item post-author-group-' + key"
-              v-for="(player_group, key) in directGroups(post.player_groups)"
-              :key="key"
-            >
-              {{ player_group.title }}
+              v-for="player_group in directGroups(post.player_groups)"
+              :class="postGroupClasses(player_group.id)"
+              :key="player_group.id"
+            >{{player_group.title}}
             </div>
           </div>
         </div>
@@ -322,23 +321,64 @@ export default {
     this.loadThread();
   },
   methods: {
+    postGroupClasses: function(group_name) {
+      let classes = {
+        'post-author-group-item': true,
+        'post-author-group-default': (group_name.indexOf('default') !== -1),
+        'post-author-group-guild': (group_name.indexOf('_guild') !== -1),
+        'post-author-group-builder': (group_name.indexOf('_builder') !== -1),
+        'post-author-group-moderator': (group_name.indexOf('moderator') !== -1),
+        'post-author-group-leader': (group_name.indexOf('leader') !== -1),
+        'post-author-group-staff': (group_name.indexOf('staff') !== -1),
+        'post-author-group-administrator': (group_name.indexOf('administrator') !== -1),
+      };
+
+      return classes;
+    },
+
     relativeDate(epoch) {
       return relativeEpochDate(epoch);
     },
 
     directGroups: function (groupList) {
-      const asArray = Object.entries(groupList);
-      const directGroups = asArray.filter(
-        ([, /*key*/ value]) => !value.inherited
-      );
-
-      directGroups.sort((a, b) => {
-        a = a[1].title.toLowerCase();
-        b = b[1].title.toLowerCase();
-        return a.localeCompare(b);
+      let sortedList = [];
+      const sortOrder = ['administrator', 'staff', 'leader', 'moderator', '_builder', '_guild', 'default'];
+      const ignored = ['builder'];
+      
+      Object.keys(groupList).forEach((key) => {
+        if(ignored.indexOf(key) == -1) {
+          if(!groupList[key].inherited) {
+            let itemData = groupList[key];
+            itemData['id'] = key;
+            
+            sortedList.push(itemData);
+          }
+        }
       });
+      
+      sortedList = sortedList.sort((a, b) => {
+        let a_value = 0;
+        sortOrder.forEach((value, key) => {
+          if(a['id'].indexOf(value) !== -1) {
+            a_value = key;
+          }
+        });
 
-      return Object.fromEntries(directGroups);
+        let b_value = 0;
+        sortOrder.forEach((value, key) => {
+          if(b['id'].indexOf(value) !== -1) {
+            b_value = key;
+          }
+        });
+          
+        return a_value - b_value;
+      });
+      
+      if(sortedList.length > 1 && sortedList[sortedList.length -1]['id'] == 'default') {
+        sortedList.pop();
+      }
+
+      return sortedList;
     },
 
     lockThread: function (state) {
@@ -886,6 +926,7 @@ export default {
           width: 100%;
   
           .post-author-group-item {
+            white-space: nowrap;
             font-weight: bold;
             display: flex;
             border-radius: 0.2rem;
@@ -915,13 +956,15 @@ export default {
             }
           }
   
-          .post-author-group-developer {
-            background-color: #d80000;
+          .post-author-group-staff {
+            background-color: #800080;
   
             &::before {
               content: "";
               display: inline-block;
-              background-image: url("/images/Iron_Pickaxe.png");
+              // background-image: url("/images/Iron_Pickaxe.png");
+              // background-image: url("/images/Diamond_Sword.png");
+              background-image: url("/images/Diamond.png");
               background-position: center;
               background-size: contain;
               background-repeat: no-repeat;
@@ -938,7 +981,7 @@ export default {
             &::before {
               content: "";
               display: inline-block;
-              background-image: url("/images/Wooden_Axe.png");
+              background-image: url("/images/Iron_Pickaxe.png");
               background-position: center;
               background-size: contain;
               background-repeat: no-repeat;
