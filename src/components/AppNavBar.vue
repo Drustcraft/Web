@@ -187,11 +187,13 @@ export default {
   transition-timing-function: ease-out;
   background-color: transparent;
   z-index: 20;
+  height: 3.25rem;
 
   .brand {
     background-color: rgba(34, 34, 34, 1);
     display: block;
     text-align: center;
+    line-height: 0;
   }
 
   .hamburger {
@@ -262,9 +264,9 @@ export default {
 
   .brand-image {
     display: inline-block;
-    width: 165px;
-    height: 56px;
-    margin-left: 1rem;
+    width: 153px;
+    height: 52px;
+    margin-left: 0rem;
     background-image: url("/images/brand.png");
     background-repeat: no-repeat;
     background-size: contain;
@@ -319,6 +321,7 @@ export default {
 
     .brand-image {
       position: absolute;
+      margin-left: 1rem;
     }
 
     .nav-menu {
@@ -362,7 +365,7 @@ export default {
       .nav-group-right {
         margin-right: 0.5rem;
       }
-    }
+    }    
   }
 }
 </style>
