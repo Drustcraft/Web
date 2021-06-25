@@ -26,23 +26,16 @@
         <h3 class="section-title">{{ section.title }}</h3>
       </div>
       <div class="section-body">
-        <div class="category-header">
-          <div class="header-item header-item-title">Category</div>
-          <div class="header-item header-item-threads">Threads</div>
-          <div class="header-item header-item-posts">Posts</div>
-          <div class="header-item header-item-latest">Latest</div>
-        </div>
         <router-link
           class="category-row category-item category-link"
           :to="'/forums/' + category.slug"
           v-for="category in section.categories"
           :key="category.slug"
         >
-          <div class="row-item row-item-title">{{ category.title }}</div>
-          <div class="row-item row-item-threads">
-            {{ category.thread_count }}
+          <div class="row-item row-item-title">{{category.title}}</div>
+          <div class="row-item row-item-threads"><span>Threads</span>{{category.thread_count}}
           </div>
-          <div class="row-item row-item-posts">{{ category.post_count }}</div>
+          <div class="row-item row-item-posts"><span>Posts</span>{{category.post_count}}</div>
           <div class="row-item row-item-latest" v-if="category.latest_post">
             <div class="latest-post-avatar">
               <img
@@ -60,12 +53,8 @@
               }}</router-link>
             </div>
             <div class="latest-post-details">
-              <div class="latest-post-created">
-                {{ relativeDate(category.latest_post.created) }}
-              </div>
-              <div class="latest-post-author">
-                {{ category.latest_post.player_name }}
-              </div>
+              <div class="latest-post-created">{{relativeDate(category.latest_post.created)}}</div>
+              <div class="latest-post-author">{{category.latest_post.player_name}}</div>
             </div>
           </div>
           <div class="row-item row-item-latest-none" v-else>No Posts Found</div>
@@ -158,19 +147,15 @@ export default {
 
 <style lang="scss">
 .forum {
-  // position: relative;
-  // margin-top: 3.25rem;
-  // width: 100%;
-
   .section {
     padding: 1rem 1.5rem 3rem 1.5rem;
   }
 
   .section-body {
-    .category-row,
-    .category-header {
+    .category-row {
       display: grid;
-      grid-template-columns: auto 4.5rem 4.5rem 17rem;
+      grid-template-columns: min-content auto;
+      grid-template-rows: auto auto auto;
       border-top: 1px solid rgba(255, 255, 255, 0.2);
     }
 
@@ -203,11 +188,32 @@ export default {
 
     .header-item-threads,
     .header-item-posts,
-    .header-item-latest,
+    .header-item-latest {
+      justify-self: center;
+    }
+
+    .header-item-threads,
+    .header-item-posts {
+      display: none;
+    }
+
+    
     .row-item-threads,
     .row-item-posts {
-      justify-self: center;
       overflow: hidden;
+      white-space: nowrap;
+      font-size: 80%;
+      padding-top: 0;
+      
+      span {
+        display: inline-block;
+        margin-right: 0.25rem;
+        color: #666;
+
+        &:after {
+          content: ":";
+        }
+      }      
     }
 
     .row-item,
@@ -221,20 +227,53 @@ export default {
         color: #fff;
       }
     }
+    
+    .header-item-title {
+      grid-column: 1 / span 1;
+      grid-row: 1 / span 1;      
+    }
+    
+    .row-item-title {
+      grid-column: 1 / span 2;
+      grid-row: 1 / span 1;
+      padding-bottom: 0;
+    }
+
+    .row-item-threads {
+      grid-column: 1 / span 1;
+      grid-row: 2 / span 1;
+      padding-right: 0;
+
+      &:after {
+        color: #666;
+        padding: 0 0.5rem 0 0.25rem;
+        content: "•";
+      }
+    }
+
+    .row-item-posts {
+      grid-column: 2 / span 1;
+      grid-row: 2 / span 1;
+      padding-left: 0;
+    }
 
     .row-item-latest {
+      grid-column: 1 / span 2;
+      grid-row: 3 / span 1;
+
       display: grid;
-      grid-template-columns: 2.5rem auto;
+      grid-template-columns: auto;
       grid-template-rows: 1.2rem 1.2rem;
 
       .latest-post-avatar {
+        display: none;
         grid-column: 1 / span 1;
         grid-row: 1 / span 2;
         align-self: center;
       }
 
       .latest-post-thread {
-        grid-area: 1 / 2 / 1 / 2;
+        grid-area: 1 / 1 / 1 / 1;
         font-size: 0.8rem;
         white-space: nowrap;
         overflow: hidden;
@@ -242,9 +281,8 @@ export default {
       }
 
       .latest-post-details {
-        grid-area: 2 / 2 / 2 / 2;
+        grid-area: 2 / 1 / 2 / 1;
         display: flex;
-        // justify-content: space-between;
         font-size: 0.8rem;
       }
 
@@ -265,9 +303,108 @@ export default {
     }
 
     .row-item-latest-none {
+      grid-column: 1 / span 2;
+      grid-row: 3 / span 1;
       font-size: 0.8rem;
-      text-align: center;
     }
   }
+}
+
+@media only screen and (min-width: 550px) {
+  .forum {
+    .section-body {
+      .category-row {
+        grid-template-columns: min-content auto 17rem;
+        grid-template-rows: auto auto;        
+      }
+      
+      .row-item-latest {
+        grid-column: 3 / span 1;
+        grid-row: 1 / span 2;
+        grid-template-columns: 2.5rem auto;
+
+        .latest-post-avatar {
+          display: block;
+        }
+
+        .latest-post-thread {
+          grid-area: 1 / 2 / 1 / 2;
+        }
+
+        .latest-post-details {
+          grid-area: 2 / 2 / 2 / 2;
+        }
+      }
+      
+      .row-item-latest-none {
+        grid-column: 3 / span 1;
+        grid-row: 1 / span 2;
+        text-align: center;
+      }
+    }
+  }
+}
+  
+@media only screen and (min-width: 770px) {
+  .forum {
+    .section-body {
+      .category-row,
+      .category-header {
+        grid-template-columns: auto 4.5rem 4.5rem 17rem;
+        grid-template-rows: auto;
+      }
+      
+      .header-item-threads {
+        display: block;
+      }
+      
+      .header-item-posts {
+        display: block;
+      }
+      
+      .row-item-title {
+        grid-column: 1 / span 1;
+        grid-row: 1 / span 1;
+        padding-bottom: 0.75rem;
+      }
+      
+      .row-item-threads {
+        grid-column: 2 / span 1;
+        grid-row: 1 / span 1;
+        
+        &:after {
+          padding: 0;
+          content: "";
+        }
+      }
+  
+      .row-item-posts {
+        grid-column: 3 / span 1;
+        grid-row: 1 / span 1;
+      }
+  
+      .row-item-latest,
+      .row-item-latest-none {
+        grid-column: 4 / span 1;
+        grid-row: 1 / span 1;
+      }
+
+      .row-item-threads,
+      .row-item-posts {
+        font-size: 100%;
+        padding-top: 0.75rem;
+        text-align: center;
+        
+        span {
+          display: block;
+          font-size: 80%;
+          
+          &:after {
+            content: "";
+          }
+        }
+      }
+    }
+  }  
 }
 </style>

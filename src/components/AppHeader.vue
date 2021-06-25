@@ -55,6 +55,7 @@ export default {
 <style lang="scss">
 .header {
   .maintenance {
+    display: flex;
     position: fixed;
     top: 0;
     left: 0;
@@ -77,6 +78,14 @@ export default {
       &:hover {
         text-decoration: underline;
       }
+    }
+    
+    :first-child {
+      flex: 1;
+    }
+    
+    :last-child {
+      justify-content: flex-end;
     }
   }
 
