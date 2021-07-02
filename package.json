@@ -13,6 +13,7 @@
     "@tiptap/extension-blockquote": "^2.0.0-beta.11",
     "@tiptap/extension-bold": "^2.0.0-beta.11",
     "@tiptap/extension-bullet-list": "^2.0.0-beta.11",
+    "@tiptap/extension-code": "^2.0.0-beta.14",
     "@tiptap/extension-code-block": "^2.0.0-beta.13",
     "@tiptap/extension-document": "^2.0.0-beta.10",
     "@tiptap/extension-dropcursor": "^2.0.0-beta.11",
