@@ -32,10 +32,13 @@
           v-for="category in section.categories"
           :key="category.slug"
         >
-          <div class="row-item row-item-title">{{category.title}}</div>
-          <div class="row-item row-item-threads"><span>Threads</span>{{category.thread_count}}
+          <div class="row-item row-item-title">{{ category.title }}</div>
+          <div class="row-item row-item-threads">
+            <span>Threads</span>{{ category.thread_count }}
           </div>
-          <div class="row-item row-item-posts"><span>Posts</span>{{category.post_count}}</div>
+          <div class="row-item row-item-posts">
+            <span>Posts</span>{{ category.post_count }}
+          </div>
           <div class="row-item row-item-latest" v-if="category.latest_post">
             <div class="latest-post-avatar">
               <img
@@ -53,8 +56,12 @@
               }}</router-link>
             </div>
             <div class="latest-post-details">
-              <div class="latest-post-created">{{relativeDate(category.latest_post.created)}}</div>
-              <div class="latest-post-author">{{category.latest_post.player_name}}</div>
+              <div class="latest-post-created">
+                {{ relativeDate(category.latest_post.created) }}
+              </div>
+              <div class="latest-post-author">
+                {{ category.latest_post.player_name }}
+              </div>
             </div>
           </div>
           <div class="row-item row-item-latest-none" v-else>No Posts Found</div>
@@ -197,14 +204,13 @@ export default {
       display: none;
     }
 
-    
     .row-item-threads,
     .row-item-posts {
       overflow: hidden;
       white-space: nowrap;
       font-size: 80%;
       padding-top: 0;
-      
+
       span {
         display: inline-block;
         margin-right: 0.25rem;
@@ -213,7 +219,7 @@ export default {
         &:after {
           content: ":";
         }
-      }      
+      }
     }
 
     .row-item,
@@ -227,12 +233,12 @@ export default {
         color: #fff;
       }
     }
-    
+
     .header-item-title {
       grid-column: 1 / span 1;
-      grid-row: 1 / span 1;      
+      grid-row: 1 / span 1;
     }
-    
+
     .row-item-title {
       grid-column: 1 / span 2;
       grid-row: 1 / span 1;
@@ -315,9 +321,9 @@ export default {
     .section-body {
       .category-row {
         grid-template-columns: min-content auto 17rem;
-        grid-template-rows: auto auto;        
+        grid-template-rows: auto auto;
       }
-      
+
       .row-item-latest {
         grid-column: 3 / span 1;
         grid-row: 1 / span 2;
@@ -335,7 +341,7 @@ export default {
           grid-area: 2 / 2 / 2 / 2;
         }
       }
-      
+
       .row-item-latest-none {
         grid-column: 3 / span 1;
         grid-row: 1 / span 2;
@@ -344,7 +350,7 @@ export default {
     }
   }
 }
-  
+
 @media only screen and (min-width: 770px) {
   .forum {
     .section-body {
@@ -353,36 +359,36 @@ export default {
         grid-template-columns: auto 4.5rem 4.5rem 17rem;
         grid-template-rows: auto;
       }
-      
+
       .header-item-threads {
         display: block;
       }
-      
+
       .header-item-posts {
         display: block;
       }
-      
+
       .row-item-title {
         grid-column: 1 / span 1;
         grid-row: 1 / span 1;
         padding-bottom: 0.75rem;
       }
-      
+
       .row-item-threads {
         grid-column: 2 / span 1;
         grid-row: 1 / span 1;
-        
+
         &:after {
           padding: 0;
           content: "";
         }
       }
-  
+
       .row-item-posts {
         grid-column: 3 / span 1;
         grid-row: 1 / span 1;
       }
-  
+
       .row-item-latest,
       .row-item-latest-none {
         grid-column: 4 / span 1;
@@ -394,17 +400,17 @@ export default {
         font-size: 100%;
         padding-top: 0.75rem;
         text-align: center;
-        
+
         span {
           display: block;
           font-size: 80%;
-          
+
           &:after {
             content: "";
           }
         }
       }
     }
-  }  
+  }
 }
 </style>

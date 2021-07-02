@@ -1,45 +1,33 @@
 <template>
   <div id="footer">
     <div class="social">
-      <ul>
-        <li>
-          <a href="https://www.twitter.com/drustcraft" title="Twitter"
-            ><i class="fab fa-twitter"></i
-          ></a>
-        </li>
-        <li>
-          <a href="https://www.facebook.com/drustcraft" title="Facebook"
-            ><i class="fab fa-facebook-f"></i
-          ></a>
-        </li>
-        <li>
-          <a href="https://www.instagram.com/drustcraft" title="Instagram"
-            ><i class="fab fa-instagram"></i
-          ></a>
-        </li>
-        <li>
-          <a
-            href="https://www.youtube.com/channel/UCUZLUu9b87ylDEai_rnUvKA"
-            title="Youtube"
-            ><i class="fab fa-youtube"></i
-          ></a>
-        </li>
-        <li>
-          <a href="https://discord.gg/yNzk4x7mpD" title="Discord"
-            ><i class="fab fa-discord"></i
-          ></a>
-        </li>
-        <li>
-          <a href="https://www.reddit.com/r/drustcraft" title="Reddit"
-            ><i class="fab fa-reddit"></i
-          ></a>
-        </li>
-        <li>
-          <a href="http://github.com/drustcraft" title="Github"
-            ><i class="fab fa-github"></i
-          ></a>
-        </li>
-      </ul>
+      <div class="social-row">
+        <a href="https://www.twitter.com/drustcraft" title="Twitter"
+          ><i class="fab fa-twitter"></i
+        ></a>
+        <a href="https://www.facebook.com/drustcraft" title="Facebook"
+          ><i class="fab fa-facebook-f"></i
+        ></a>
+        <a href="https://www.instagram.com/drustcraft" title="Instagram"
+          ><i class="fab fa-instagram"></i
+        ></a>
+      </div>
+      <div class="social-row">
+        <a
+          href="https://www.youtube.com/channel/UCUZLUu9b87ylDEai_rnUvKA"
+          title="Youtube"
+          ><i class="fab fa-youtube"></i
+        ></a>
+        <a href="https://discord.gg/yNzk4x7mpD" title="Discord"
+          ><i class="fab fa-discord"></i
+        ></a>
+        <a href="https://www.reddit.com/r/drustcraft" title="Reddit"
+          ><i class="fab fa-reddit"></i
+        ></a>
+        <a href="http://github.com/drustcraft" title="Github"
+          ><i class="fab fa-github"></i
+        ></a>
+      </div>
     </div>
 
     <div class="footer-bottom">
@@ -100,7 +88,7 @@ export default {
 
   .social {
     background-color: rgba(255, 255, 255, 0.05);
-    padding: 1rem;
+    padding: 0.5rem 1rem 1rem 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     margin-bottom: 4rem;
@@ -113,6 +101,10 @@ export default {
       &:hover {
         color: #f8da44;
       }
+    }
+
+    .social-row {
+      margin-top: 0.5rem;
     }
   }
 
@@ -164,6 +156,12 @@ export default {
 
   .footer-links a {
     margin: 0 1rem;
+  }
+}
+
+@media only screen and (min-width: 770px) {
+  .social-row {
+    display: inline-block;
   }
 }
 </style>

@@ -112,7 +112,6 @@ export default {
   }
 
   .modal-card-foot {
-    
     a {
       // width: 100%;
     }

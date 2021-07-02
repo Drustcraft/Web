@@ -54,19 +54,48 @@
           v-for="thread in threads"
           :key="thread.slug"
         >
-          <div class="row-item row-item-author-head"><img class="player-head" :src="'https://mc-heads.net/avatar/' + thread.player_uuid + '/32/nohelm.png'"/></div>
-          <div class="row-item row-item-title"><i v-if="thread.pinned" class="fas fa-thumbtack"></i><i v-if="thread.locked" class="fas fa-lock"></i>{{thread.title}}</div>
-          <div class="row-item row-item-thread-info">
-            <span class="row-item-author">{{thread.player_name}}</span>
-            <span class="row-item-posted">{{relativeDate(thread.created)}}</span>
+          <div class="row-item row-item-author-head">
+            <img
+              class="player-head"
+              :src="
+                'https://mc-heads.net/avatar/' +
+                thread.player_uuid +
+                '/32/nohelm.png'
+              "
+            />
           </div>
-          <div class="row-item row-item-posts"><span>Replies:</span>{{thread.post_count}}</div>
-          <div class="row-item row-item-views"><span>Views:</span>{{thread.views}}</div>
+          <div class="row-item row-item-title">
+            <i v-if="thread.pinned" class="fas fa-thumbtack"></i
+            ><i v-if="thread.locked" class="fas fa-lock"></i>{{ thread.title }}
+          </div>
+          <div class="row-item row-item-thread-info">
+            <span class="row-item-author">{{ thread.player_name }}</span>
+            <span class="row-item-posted">{{
+              relativeDate(thread.created)
+            }}</span>
+          </div>
+          <div class="row-item row-item-posts">
+            <span>Replies:</span>{{ thread.post_count }}
+          </div>
+          <div class="row-item row-item-views">
+            <span>Views:</span>{{ thread.views }}
+          </div>
           <div class="row-item row-item-latest">
-            <span class="row-item-latest-posted">{{relativeDate(thread.latest_post.created)}}</span>
+            <span class="row-item-latest-posted">{{
+              relativeDate(thread.latest_post.created)
+            }}</span>
             <span class="row-item-latest-author">
-              <img class="player-head" :src="'https://mc-heads.net/avatar/' + thread.latest_post.player_uuid + '/16/nohelm.png'"/>
-              <span class="row-item-latest_author-name">{{thread.latest_post.player_name}}</span>
+              <img
+                class="player-head"
+                :src="
+                  'https://mc-heads.net/avatar/' +
+                  thread.latest_post.player_uuid +
+                  '/16/nohelm.png'
+                "
+              />
+              <span class="row-item-latest_author-name">{{
+                thread.latest_post.player_name
+              }}</span>
             </span>
           </div>
         </router-link>
@@ -248,7 +277,7 @@ export default {
         background-color: rgba(255, 255, 255, 0.1);
       }
     }
-    
+
     .row-item {
       padding: 0.75rem;
       align-self: center;
@@ -261,7 +290,7 @@ export default {
 
     a:hover {
       transition: all 0.3s ease-in-out;
-      
+
       a,
       .row-item {
         color: #fff;
@@ -286,7 +315,7 @@ export default {
       padding-bottom: 0;
       color: #fff;
     }
-    
+
     .row-item-thread-info {
       grid-column: 2 / span 2;
       grid-row: 2 / span 1;
@@ -294,25 +323,25 @@ export default {
       padding-bottom: 0;
       font-size: 80%;
       color: #666;
-      
+
       .row-item-author:after {
         padding: 0 0.25rem;
         content: "·";
       }
     }
-    
+
     .row-item-posts {
       grid-column: 2 / span 1;
       grid-row: 3 / span 1;
       padding-top: 0;
       padding-right: 0;
-      
+
       &:after {
         padding: 0 0.25rem;
         content: "·";
       }
     }
-    
+
     .row-item-views {
       display: none;
       grid-column: 3 / span 1;
@@ -320,7 +349,8 @@ export default {
       padding-top: 0rem;
     }
 
-    .row-item-posts, .row-item-views {
+    .row-item-posts,
+    .row-item-views {
       font-size: 80%;
       white-space: nowrap;
       text-align: center;
@@ -329,9 +359,9 @@ export default {
         display: inline-block;
         margin-right: 0.25rem;
         color: #666;
-      }      
+      }
     }
-    
+
     .row-item-latest {
       grid-column: 3 / span 1;
       grid-row: 3 / span 1;
@@ -341,17 +371,17 @@ export default {
       display: block;
       flex-direction: column;
       align-items: center;
-      
+
       .row-item-latest-author {
         display: none;
         align-items: center;
         margin-top: 0.25rem;
-        
+
         .player-head {
           margin-right: 0.5rem;
         }
       }
-    }    
+    }
   }
 }
 
@@ -362,7 +392,7 @@ export default {
         grid-template-columns: 4rem auto 9rem 9rem;
         grid-template-rows: auto auto;
       }
-      
+
       .row-item-author-head {
         grid-column: 1 / span 1;
         grid-row: 1 / span 2;
@@ -375,13 +405,13 @@ export default {
 
       .row-item-thread-info {
         grid-column: 2 / span 1;
-        grid-row: 2 / span 1;     
-        padding-bottom: 0.75rem;   
+        grid-row: 2 / span 1;
+        padding-bottom: 0.75rem;
       }
-      
+
       .row-item-posts {
         grid-column: 3 / span 1;
-        grid-row: 1 / span 1;        
+        grid-row: 1 / span 1;
         padding-top: 0.75rem;
         padding-bottom: 0;
         padding-right: 0.75rem;
@@ -402,7 +432,7 @@ export default {
         padding-top: 0.75rem;
         padding-left: 0.75rem;
         display: flex;
-        
+
         .row-item-latest-author {
           display: flex;
         }

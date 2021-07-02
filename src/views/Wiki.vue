@@ -42,32 +42,32 @@ export default {
   components: {
     NodeList,
   },
-  mounted: function() {
+  mounted: function () {
     this.loadSidebar();
   },
   methods: {
-    loadSidebar: function() {
+    loadSidebar: function () {
       api
         .get("/wiki/list")
         .then((response) => {
           this.pages = {};
-  
+
           let tree = {
             title: "",
             slug: "",
             path: "/",
             pages: Array(),
           };
-  
+
           response.data.pages.forEach(function (item) {
             let dirs = item.path.split("/").slice(1);
-  
+
             let iterate = function (idx, dirs, node) {
               if (idx == dirs.length - 1) {
                 let search = node.pages.findIndex(function (search_item) {
                   return search_item.slug == dirs[idx];
                 });
-  
+
                 if (search != -1) {
                   node.pages[search].title = item.title;
                 } else {
@@ -82,7 +82,7 @@ export default {
                 let search = node.pages.findIndex(function (search_item) {
                   return search_item.slug == dirs[idx];
                 });
-  
+
                 if (search != -1) {
                   iterate(idx + 1, dirs, node.pages[search]);
                 } else {
@@ -92,15 +92,15 @@ export default {
                     path: "/" + dirs.slice(0, idx + 1).join("/"),
                     pages: Array(),
                   });
-  
+
                   iterate(idx + 1, dirs, node.pages[node.pages.length - 1]);
                 }
               }
             };
-  
+
             iterate(0, dirs, tree);
           });
-  
+
           this.pages = tree.pages;
         })
         .catch((error) => {

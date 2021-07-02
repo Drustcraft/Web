@@ -35,7 +35,6 @@
 
 <script>
 import api from "@/api.js";
-// import { checkAxiosErrorDefined } from "@/common.js";
 
 export default {
   data: function () {

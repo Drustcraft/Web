@@ -174,7 +174,8 @@
               v-for="player_group in directGroups(post.player_groups)"
               :class="postGroupClasses(player_group.id)"
               :key="player_group.id"
-            >{{player_group.title}}
+            >
+              {{ player_group.title }}
             </div>
           </div>
         </div>
@@ -321,16 +322,17 @@ export default {
     this.loadThread();
   },
   methods: {
-    postGroupClasses: function(group_name) {
+    postGroupClasses: function (group_name) {
       let classes = {
-        'post-author-group-item': true,
-        'post-author-group-default': (group_name.indexOf('default') !== -1),
-        'post-author-group-guild': (group_name.indexOf('_guild') !== -1),
-        'post-author-group-builder': (group_name.indexOf('_builder') !== -1),
-        'post-author-group-moderator': (group_name.indexOf('moderator') !== -1),
-        'post-author-group-leader': (group_name.indexOf('leader') !== -1),
-        'post-author-group-staff': (group_name.indexOf('staff') !== -1),
-        'post-author-group-administrator': (group_name.indexOf('administrator') !== -1),
+        "post-author-group-item": true,
+        "post-author-group-default": group_name.indexOf("default") !== -1,
+        "post-author-group-guild": group_name.indexOf("_guild") !== -1,
+        "post-author-group-builder": group_name.indexOf("_builder") !== -1,
+        "post-author-group-moderator": group_name.indexOf("moderator") !== -1,
+        "post-author-group-leader": group_name.indexOf("leader") !== -1,
+        "post-author-group-staff": group_name.indexOf("staff") !== -1,
+        "post-author-group-administrator":
+          group_name.indexOf("administrator") !== -1,
       };
 
       return classes;
@@ -342,39 +344,50 @@ export default {
 
     directGroups: function (groupList) {
       let sortedList = [];
-      const sortOrder = ['administrator', 'staff', 'leader', 'moderator', '_builder', '_guild', 'default'];
-      const ignored = ['builder'];
-      
+      const sortOrder = [
+        "administrator",
+        "staff",
+        "leader",
+        "moderator",
+        "_builder",
+        "_guild",
+        "default",
+      ];
+      const ignored = ["builder"];
+
       Object.keys(groupList).forEach((key) => {
-        if(ignored.indexOf(key) == -1) {
-          if(!groupList[key].inherited) {
+        if (ignored.indexOf(key) == -1) {
+          if (!groupList[key].inherited) {
             let itemData = groupList[key];
-            itemData['id'] = key;
-            
+            itemData["id"] = key;
+
             sortedList.push(itemData);
           }
         }
       });
-      
+
       sortedList = sortedList.sort((a, b) => {
         let a_value = 0;
         sortOrder.forEach((value, key) => {
-          if(a['id'].indexOf(value) !== -1) {
+          if (a["id"].indexOf(value) !== -1) {
             a_value = key;
           }
         });
 
         let b_value = 0;
         sortOrder.forEach((value, key) => {
-          if(b['id'].indexOf(value) !== -1) {
+          if (b["id"].indexOf(value) !== -1) {
             b_value = key;
           }
         });
-          
+
         return a_value - b_value;
       });
-      
-      if(sortedList.length > 1 && sortedList[sortedList.length -1]['id'] == 'default') {
+
+      if (
+        sortedList.length > 1 &&
+        sortedList[sortedList.length - 1]["id"] == "default"
+      ) {
         sortedList.pop();
       }
 
@@ -812,19 +825,19 @@ export default {
     .section {
       padding: 1rem 1.5rem 3rem 1.5rem;
     }
-  
+
     h3 {
       margin-bottom: 0;
       color: #fff;
     }
-  
+
     .thread-header {
       h3,
       .thread-info {
         display: inline-block;
       }
     }
-  
+
     .thread-header-banner {
       margin: -2.5rem -2.5rem 0 -2.5rem;
       padding: 20rem 2.5rem 1.5rem 2.5rem;
@@ -842,7 +855,7 @@ export default {
         background-color: rgba(0, 0, 0, 0.8);
         box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.8);
       }
-  
+
       // h3,
       // .thread-info {
       //   background-color: rgba(0, 0, 0, 0.7);
@@ -851,53 +864,53 @@ export default {
       //     20px 0 10px 8px rgba(0, 0, 0, 0.7);
       // }
     }
-  
+
     .thread-info {
       font-size: 80%;
       margin-bottom: 0.5rem;
-  
+
       img {
         vertical-align: middle;
       }
-  
+
       img,
       .fas,
       .far {
         margin-right: 0.25rem;
       }
-  
+
       li {
         display: inline-block;
-  
+
         &:before {
           content: "\2022";
           margin: 0 0.5rem;
         }
-  
+
         &:first-child:before {
           content: "";
           margin: 0;
         }
       }
     }
-  
+
     .thread-options {
       display: flex;
       justify-content: flex-end;
       margin-bottom: 1rem;
       column-gap: 0.25rem;
     }
-  
+
     .post-toolbar {
       display: flex;
       justify-content: space-between;
     }
-  
+
     .post {
       // border-top: 1px solid rgba(255, 255, 255, 0.3);
       display: flex;
       padding-top: 2rem;
-  
+
       .post-side {
         width: 8rem;
         display: flex;
@@ -905,26 +918,26 @@ export default {
         align-items: center;
         margin-bottom: 2rem;
         font-size: 0.8rem;
-  
+
         .post-author-name {
           color: rgba(255, 255, 255, 1);
         }
-  
+
         .post-author-image {
           margin-bottom: 0.5rem;
-  
+
           img {
             border-radius: 4px;
           }
         }
-  
+
         .post-author-groups {
           text-align: center;
           margin-top: 0.5rem;
           display: flex;
           flex-direction: column;
           width: 100%;
-  
+
           .post-author-group-item {
             white-space: nowrap;
             font-weight: bold;
@@ -939,10 +952,10 @@ export default {
             text-align: left;
             align-items: center;
           }
-  
+
           .post-author-group-administrator {
             background-color: #d80000;
-  
+
             &::before {
               content: "";
               display: inline-block;
@@ -955,10 +968,10 @@ export default {
               margin-right: 0.4rem;
             }
           }
-  
+
           .post-author-group-staff {
             background-color: #800080;
-  
+
             &::before {
               content: "";
               display: inline-block;
@@ -973,11 +986,11 @@ export default {
               margin-right: 0.4rem;
             }
           }
-  
+
           .post-author-group-builder {
             background-color: #e2a233;
             color: #000;
-  
+
             &::before {
               content: "";
               display: inline-block;
@@ -990,10 +1003,10 @@ export default {
               margin-right: 0.4rem;
             }
           }
-  
+
           .post-author-group-leader {
             background-color: #4495d4;
-  
+
             &::before {
               content: "";
               display: inline-block;
@@ -1006,10 +1019,10 @@ export default {
               margin-right: 0.4rem;
             }
           }
-  
+
           .post-author-group-moderator {
             background-color: #4495d4;
-  
+
             &::before {
               content: "";
               display: inline-block;
@@ -1022,7 +1035,7 @@ export default {
               margin-right: 0.4rem;
             }
           }
-  
+
           .post-author-group-default {
             &::before {
               content: "";
@@ -1038,7 +1051,7 @@ export default {
           }
         }
       }
-  
+
       .post-main {
         flex-grow: 1;
         display: flex;
@@ -1046,7 +1059,7 @@ export default {
         margin-left: 2rem;
         margin-bottom: 2rem;
         margin-right: 2rem;
-  
+
         .post-info {
           display: flex;
           font-size: 80%;
@@ -1054,48 +1067,48 @@ export default {
           margin-bottom: 0.5rem;
           border-bottom: 1px solid rgba(255, 255, 255, 0.2);
           column-gap: 0.25rem;
-  
+
           i {
             margin-right: 0.25rem;
           }
-  
+
           a {
             color: rgba(255, 255, 255, 0.5);
-  
+
             &:hover {
               color: rgba(255, 255, 255, 0.8);
             }
           }
-  
+
           .post-url {
             margin-left: auto;
           }
         }
-  
+
         .post-content {
           color: #fff;
           flex-grow: 1;
-  
+
           img {
             display: block;
             margin: 2rem auto;
           }
-          
+
           p {
             margin-bottom: 2rem;
           }
         }
-  
+
         .post-options {
           li {
             display: inline-block;
             font-size: 80%;
             margin: 0 0.5rem;
-  
+
             &:first-of-type {
               margin-left: 0;
             }
-  
+
             &:last-of-type {
               margin-right: 0;
             }
@@ -1103,31 +1116,31 @@ export default {
         }
       }
     }
-  
+
     .post-reply {
       margin-top: 2rem;
       padding: 1.5rem;
       border-top: 1px solid #333;
-  
+
       .notification {
         display: inline-block;
       }
-  
+
       #editor {
         margin-bottom: 1rem;
       }
-  
+
       .post-reply-buttons {
         display: flex;
         justify-content: flex-end;
       }
-  
+
       .post-reply-cannot {
         text-align: center;
         margin-top: 1rem;
         font-size: 90%;
         color: #666;
-  
+
         i {
           margin-right: 0.25rem;
         }

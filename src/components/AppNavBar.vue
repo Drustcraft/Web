@@ -78,7 +78,7 @@ export default {
       immediate: true,
     },
   },
-  mounted: function() {
+  mounted: function () {
     window.addEventListener("click", this.clickOutsideNav);
     window.addEventListener("touchstart", this.clickOutsideNav);
   },
@@ -87,13 +87,16 @@ export default {
       let hamburger = document.querySelector(".navbar .hamburger");
       let navmenu = document.querySelector(".navbar .nav-menu");
 
-      if(window.getComputedStyle(navmenu).display === "none" && !hamburger.classList.contains("active")) {
-        this.showNavMenu()
+      if (
+        window.getComputedStyle(navmenu).display === "none" &&
+        !hamburger.classList.contains("active")
+      ) {
+        this.showNavMenu();
       } else {
         this.hideNavMenu();
       }
     },
-    
+
     scrollNavMenu: function () {
       let navbar = document.querySelector(".navbar");
       let sticky = navbar.offsetTop - 20;
@@ -104,13 +107,16 @@ export default {
         navbar.classList.add("floating");
       }
     },
-    
-    showNavMenu: function() {
+
+    showNavMenu: function () {
       let hamburger = document.querySelector(".navbar .hamburger");
       let navmenu = document.querySelector(".navbar .nav-menu");
       let duration = 500;
-      
-      if(window.getComputedStyle(navmenu).display === "none" && !hamburger.classList.contains("active")) {
+
+      if (
+        window.getComputedStyle(navmenu).display === "none" &&
+        !hamburger.classList.contains("active")
+      ) {
         navmenu.style.removeProperty("display");
         let display = window.getComputedStyle(navmenu).display;
         if (display === "none") display = "block";
@@ -137,17 +143,20 @@ export default {
           navmenu.style.removeProperty("transition-duration");
           navmenu.style.removeProperty("transition-property");
         }, duration);
-        
+
         hamburger.classList.add("active");
       }
     },
-    
-    hideNavMenu: function() {
+
+    hideNavMenu: function () {
       let hamburger = document.querySelector(".navbar .hamburger");
       let navmenu = document.querySelector(".navbar .nav-menu");
       let duration = 500;
-      
-      if(window.getComputedStyle(navmenu).display !== "none" && hamburger.classList.contains("active")) {
+
+      if (
+        window.getComputedStyle(navmenu).display !== "none" &&
+        hamburger.classList.contains("active")
+      ) {
         navmenu.style.transitionProperty = "height, margin, padding";
         navmenu.style.transitionDuration = duration + "ms";
         navmenu.style.boxSizing = "border-box";
@@ -175,10 +184,14 @@ export default {
       }
     },
 
-    clickOutsideNav: function(e) {
-      if(document.querySelector(".navbar") && (!document.querySelector(".navbar").contains(e.target) || e.target.nodeName === "A")) {
+    clickOutsideNav: function (e) {
+      if (
+        document.querySelector(".navbar") &&
+        (!document.querySelector(".navbar").contains(e.target) ||
+          e.target.nodeName === "A")
+      ) {
         this.hideNavMenu();
-      }      
+      }
     },
 
     /* Unused below */
@@ -390,7 +403,7 @@ export default {
       .nav-group-right {
         margin-right: 0.5rem;
       }
-    }    
+    }
   }
 }
 </style>

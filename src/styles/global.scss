@@ -809,13 +809,13 @@ ul.dash {
   }
   
   .only-mobile {
-    display: block;
+    display: inline-block;
   }
 }
 
 @media only screen and (min-width: 770px) {
   .only-desktop {
-    display: block;
+    display: inline-block;
   }
   
   .only-mobile {

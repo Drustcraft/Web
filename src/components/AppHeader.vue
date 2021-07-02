@@ -2,12 +2,29 @@
   <div :class="['header', { maintenance: this.maintenance.content }]">
     <div v-if="maintenance.content" class="maintenance">
       <template v-if="maintenance.url != ''">
-        <span class="only-desktop"><router-link :to="maintenance.url"><i class="far fa-exclamation-triangle"></i>{{maintenance.content}}</router-link></span>
-        <span class="only-mobile"><router-link :to="maintenance.url"><i class="far fa-exclamation-triangle"></i>Important Notice</router-link></span>
+        <span class="only-desktop"
+          ><router-link :to="maintenance.url"
+            ><i class="far fa-exclamation-triangle"></i
+            >{{ maintenance.content }}</router-link
+          ></span
+        >
+        <span class="only-mobile"
+          ><router-link :to="maintenance.url"
+            ><i class="far fa-exclamation-triangle"></i>Important
+            Notice</router-link
+          ></span
+        >
       </template>
       <template v-else>
-        <span class="only-desktop"><i class="far fa-exclamation-triangle"></i>{{maintenance.content}}</span>
-        <span class="only-mobile"><a href="#" @click.prevent="show_maintenance_notice"><i class="far fa-exclamation-triangle"></i>Important Notice</a></span>
+        <span class="only-desktop"
+          ><i class="far fa-exclamation-triangle"></i
+          >{{ maintenance.content }}</span
+        >
+        <span class="only-mobile"
+          ><a href="#" @click.prevent="show_maintenance_notice"
+            ><i class="far fa-exclamation-triangle"></i>Important Notice</a
+          ></span
+        >
       </template>
       <a
         href="#"
@@ -48,10 +65,10 @@ export default {
     closeMaintenanceBar: function () {
       this.maintenance.content = "";
     },
-    
-    show_maintenance_notice: function() {
+
+    show_maintenance_notice: function () {
       const ModalForm = {
-        props: ['message'],
+        props: ["message"],
         template: `
           <form action="">
             <div class="modal-card" style="width: auto">
@@ -68,7 +85,7 @@ export default {
           </form>
         `,
       };
-      
+
       this.$buefy.modal.open({
         props: {
           message: this.maintenance.content,
@@ -78,7 +95,7 @@ export default {
         hasModalCard: true,
         trapFocus: true,
         autoFocus: true,
-      });          
+      });
     },
   },
 };
@@ -99,14 +116,14 @@ export default {
     color: #333;
     box-shadow: 0 1px 1px #333;
     font-size: 0.9rem;
-    
+
     span {
       flex: 1;
 
       .far {
         margin-right: 0.25rem;
       }
-      
+
       .is-pulled-right {
         justify-content: flex-end;
       }

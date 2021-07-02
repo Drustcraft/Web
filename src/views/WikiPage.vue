@@ -18,11 +18,7 @@
           <ul class="wiki-footer">
             <li>{{ footerInfo }}</li>
             <li v-if="$store.getters.inAccountGroup('staff')">
-              <a
-                href="#"
-                @click.prevent="editPage"
-                >Edit this page</a
-              >
+              <a href="#" @click.prevent="editPage">Edit this page</a>
             </li>
           </ul>
         </template>
@@ -94,7 +90,12 @@ export default {
   },
   computed: {
     footerInfo: function () {
-      return "Lasted edited " + relativeEpochDate(this.page.created) + " by " + this.page.player_name;
+      return (
+        "Lasted edited " +
+        relativeEpochDate(this.page.created) +
+        " by " +
+        this.page.player_name
+      );
     },
   },
   mounted: function () {
@@ -122,17 +123,17 @@ export default {
     },
 
     editPage: function () {
-      if(!this.page) {
+      if (!this.page) {
         this.page = {
-          title: '',
-          content: ''
+          title: "",
+          content: "",
         };
       }
-      
+
       this.editing = true;
-      
-      this.$nextTick(function() {
-        if(this.page.content != '') {
+
+      this.$nextTick(function () {
+        if (this.page.content != "") {
           this.$refs["editor"].editor.commands.setContent(
             JSON.parse(this.page.content)
           );
@@ -142,8 +143,8 @@ export default {
 
     cancelEdit: function () {
       this.editing = false;
-      
-      if(this.page.title == '' && this.page.content == '') {
+
+      if (this.page.title == "" && this.page.content == "") {
         this.page = null;
       }
     },
@@ -191,16 +192,16 @@ export default {
     },
 
     output: function (json) {
-      if(json != '') {
+      if (json != "") {
         let html = toHTML(json);
-  
+
         html = html.replace(/\[\[(.+?)\]\]/g, function (match, contents) {
           return '<a href="/wiki/' + contents + '">' + contents + "</a>";
         });
-  
+
         return html;
       } else {
-        return '';
+        return "";
       }
     },
   },
