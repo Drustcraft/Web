@@ -17,9 +17,8 @@
           ></div>
           <ul class="wiki-footer">
             <li>{{ footerInfo }}</li>
-            <li>
+            <li v-if="$store.getters.inAccountGroup('staff')">
               <a
-                v-if="$store.getters.inAccountGroup('developer')"
                 href="#"
                 @click.prevent="editPage"
                 >Edit this page</a
@@ -33,7 +32,7 @@
           <ul class="wiki-footer">
             <li>
               <a
-                v-if="$store.getters.inAccountGroup('developer')"
+                v-if="$store.getters.inAccountGroup('staff')"
                 href="#"
                 @click.prevent="editPage"
                 >Create this page</a
@@ -60,7 +59,7 @@
             />
 
             <tiptap id="editor" ref="editor" placeholder="Write your page…" />
-            <div class="post-buttons">
+            <div class="button-group">
               <b-button label="Cancel" @click="cancelEdit" />
               <b-button class="yellow" native-type="submit" label="Save Page" />
             </div>
@@ -77,7 +76,7 @@ import Tiptap from "@/components/Tiptap.vue";
 import { ValidationObserver } from "vee-validate";
 import InputValidation from "@/components/InputValidation";
 import { toHTML } from "@/components/Tiptap.vue";
-import { linkify, relativeEpochDate } from "@/common.js";
+import { relativeEpochDate } from "@/common.js";
 
 export default {
   data: function () {
@@ -95,7 +94,7 @@ export default {
   },
   computed: {
     footerInfo: function () {
-      return "Lasted edited " + relativeEpochDate(this.page.created) + " by ";
+      return "Lasted edited " + relativeEpochDate(this.page.created) + " by " + this.page.player_name;
     },
   },
   mounted: function () {
@@ -160,6 +159,7 @@ export default {
         .then(() => {
           this.editing = false;
           this.loadPage();
+          this.$parent.loadSidebar();
 
           this.$buefy.notification.open({
             message: "This page has been saved",
@@ -192,7 +192,7 @@ export default {
 
     output: function (json) {
       if(json != '') {
-        let html = linkify(toHTML(json));
+        let html = toHTML(json);
   
         html = html.replace(/\[\[(.+?)\]\]/g, function (match, contents) {
           return '<a href="/wiki/' + contents + '">' + contents + "</a>";
@@ -237,6 +237,10 @@ export default {
         content: "";
       }
     }
+  }
+
+  .button-group {
+    margin-top: 1rem;
   }
 }
 </style>
