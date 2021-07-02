@@ -69,7 +69,6 @@ export default {
         `,
       };
       
-      let self = this;
       this.$buefy.modal.open({
         props: {
           message: this.maintenance.content,
