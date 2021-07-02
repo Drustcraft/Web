@@ -404,7 +404,7 @@ export default {
   }
 }
 
-@media only screen and (max-width: 780px) {
+@media only screen and (max-width: 769px) {
   #front {
     background-image: url("/images/front.png");
 
@@ -415,7 +415,8 @@ export default {
     .front-banner {
       position: relative;
       margin: 8rem 0;
-            
+      padding: 0;
+
       .button {
         margin: 0.5rem 0 0.5rem 0;
       }
