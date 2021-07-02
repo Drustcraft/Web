@@ -26,10 +26,7 @@
           >
         </li>
 
-        <li
-          v-if="$store.getters.inAccountGroup('staff')"
-          class="nav-header"
-        >
+        <li v-if="$store.getters.inAccountGroup('staff')" class="nav-header">
           Site
         </li>
         <li v-if="$store.getters.inAccountGroup('staff')" class="nav-item">
