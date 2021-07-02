@@ -6,6 +6,10 @@
   color-scheme: dark;
 }
 
+::selection {
+  // color: inherit;
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -68,11 +72,13 @@ body {
   font-family: $family-sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, .modal-card-title {
-  font-family: Montserrat, "Open Sans", Arial,Helvetica,sans-serif;
-  text-transform: uppercase;  
-  text-shadow: 0 1px 2px rgba(0,0,0,.8);
-  color: rgba(255,255,255,0.8);
+#page {
+  h1, h2, h3, h4, h5, h6, .modal-card-title {
+    font-family: Montserrat, "Open Sans", Arial,Helvetica,sans-serif;
+    text-transform: uppercase;  
+    text-shadow: 0 1px 2px rgba(0,0,0,.8);
+    color: rgba(255,255,255,0.8);
+  }
 }
 
 h1 {
@@ -131,7 +137,16 @@ label, .label {
 }
 
 strong {
-  color: inherit;
+  // color: inherit;
+}
+
+code {
+  background-color: #333;
+  color: #eee;
+  font-size: 0.875em;
+  font-weight: normal;
+  padding: 0.25em 0.5em 0.25em;
+  margin: 0 0.25rem;
 }
 
 .content blockquote {
@@ -241,7 +256,7 @@ ul.dash {
   }
   
   p {
-    margin-bottom: 0;
+    // margin-bottom: 0;
     line-height: 1.5rem;
   }
   
@@ -329,18 +344,15 @@ ul.dash {
   z-index: 2;
 }
 
-.button-group {
-  .button {
-    margin: 0 0.5rem 0 0.5rem;
-    
-    &:first-of-type {
-      margin-left: 0;
-    }
+.button {
+  width: 100%;
+  margin: 0.5rem 0 0.5rem 0;
+}
 
-    &:last-of-type {
-      margin-right: 0;
-    }
-  }
+.button-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .notification {
@@ -415,10 +427,12 @@ ul.dash {
   .modal-card-head {
     border-color: #444;
     border-style: solid;
-    border-width: 1px 1px 0 1px;
+    // border-width: 1px 1px 0 1px;
     padding-bottom: 0;
     text-align: center;
     flex-direction: column;
+    
+    border-width: 1px;
     
     p {
       font-size: 0.9rem;
@@ -435,7 +449,9 @@ ul.dash {
     border-color: #444;
     border-style: solid;
     border-width: 0 1px 0 1px;
-    padding: 0.25rem 1rem;
+    // padding: 0.25rem 1rem;
+    
+    padding: 2rem;
     
     .notification {
       margin-top: 0;
@@ -446,14 +462,23 @@ ul.dash {
   .modal-card-foot {
     border-color: #444;
     border-style: solid;
-    padding-top: 0;
-    border-width: 0 1px 1px 1px;
+    // padding-top: 0;
+    // border-width: 0 1px 1px 1px;
     justify-content: space-between;
+
+    padding-top: 1.5rem;
+    border-width: 1px;
+    flex-direction: column;
+
     
-    .button-group:last-child {
-      flex-grow: 1;
-      text-align: right;
-    }    
+    a, .button-group, .button {
+      text-align: center;
+      width: 100%;
+    }
+    
+    a, .button {
+      margin: 0.5rem 0 0.5rem 0;      
+    }
   }
   
   .radio:hover {
@@ -558,9 +583,8 @@ ul.dash {
   margin-top: 3.25rem;
   display: flex;
   flex-grow: 1;
-
+  
   &.show-sidebar {
-    display: flex;
     flex-direction: row;
     flex-grow: 1;    
     
@@ -570,16 +594,22 @@ ul.dash {
     }
 
     .sidebar {
-      flex-shrink: 0;
       width: 15rem;
+      
+      flex-shrink: 0;
+
       transition-delay: 0.5s;
       overflow-x: hidden;
+      
+      & > ul {
+        margin: 0 2rem 3rem 2rem;
+      }
     }
 
     .sidebar-close-outer {
       visibility: visible;
       transition-delay: 0.6s;
-    }
+    }    
   }
   
   .sidebar {
@@ -591,7 +621,7 @@ ul.dash {
     white-space: nowrap;
   
     ul {
-      margin: 0 2rem 3rem 2rem;
+      transition: all 0.3s ease 0s;
       
       ul {
         margin: 0 2rem 0 1rem;
@@ -613,6 +643,7 @@ ul.dash {
         margin: 0.5rem 0 0.5rem 0;
   
         a {
+          display: block;
           color: rgba(255, 255, 255, 0.8);
   
           .fas,
@@ -758,6 +789,8 @@ ul.dash {
   }
   
   .content {
+    transition: all 0.3s ease 0s;
+    
     padding: 3rem;
     background-color: #111;
     flex-grow: 1;
@@ -768,6 +801,61 @@ ul.dash {
   #page {
     .container, .page-content {
       margin-top: 4rem;
+    }
+  }
+}
+
+@media only screen and (min-width: 770px) {
+  .modal .modal-card {
+    .modal-card-foot {
+      flex-direction: row;
+      
+      .button-group:last-child {
+        flex-grow: 1;
+        text-align: right;
+      }
+      
+      a, .button-group, .button {
+        width: auto;
+      }
+
+      a, .button {
+        margin: 0 0.5rem 0 0.5rem;
+      }
+    }
+  }
+
+  .button {
+    width: auto;
+  }
+
+  .button-group {
+    flex-direction: row;
+    
+    .button {
+      margin: 0 0.5rem 0 0.5rem;
+      
+      &:first-of-type {
+        margin-left: 0;
+      }
+  
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+  }
+  
+  .spage-content-sidebar {
+    display: flex;
+    
+    &.show-sidebar {
+      .sidebar {
+        width: 15rem;
+        
+        ul {
+          margin: 0 2rem 3rem 2rem;
+        }
+      }
     }
   }
 }
