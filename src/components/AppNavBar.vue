@@ -2,7 +2,7 @@
   <nav class="navbar">
     <div class="brand">
       <router-link to="/" class="brand-image"></router-link>
-      <button class="hamburger hamburger-cancel" @click.prevent="showNavMenu">
+      <button class="hamburger hamburger-cancel" @click.prevent="toggleNavMenu">
         <span class="icon"></span>
       </button>
     </div>
@@ -56,6 +56,8 @@ import { showComponentAsModal, logout } from "@/common.js";
 export default {
   destroyed() {
     window.removeEventListener("scroll", this.scrollNavMenu);
+    window.removeEventListener("click", this.clickOutsideNav);
+    window.removeEventListener("touchstart", this.clickOutsideNav);
   },
   watch: {
     "$route.name": {
@@ -76,75 +78,22 @@ export default {
       immediate: true,
     },
   },
+  mounted: function() {
+    window.addEventListener("click", this.clickOutsideNav);
+    window.addEventListener("touchstart", this.clickOutsideNav);
+  },
   methods: {
-    showNavMenu: function (e) {
-      let slideUp = (target, duration = 500) => {
-        target.style.transitionProperty = "height, margin, padding";
-        target.style.transitionDuration = duration + "ms";
-        target.style.boxSizing = "border-box";
-        target.style.height = target.offsetHeight + "px";
-        target.offsetHeight;
-        target.style.overflow = "hidden";
-        target.style.height = 0;
-        target.style.paddingTop = 0;
-        target.style.paddingBottom = 0;
-        target.style.marginTop = 0;
-        target.style.marginBottom = 0;
-        window.setTimeout(() => {
-          target.style.display = "none";
-          target.style.removeProperty("height");
-          target.style.removeProperty("padding-top");
-          target.style.removeProperty("padding-bottom");
-          target.style.removeProperty("margin-top");
-          target.style.removeProperty("margin-bottom");
-          target.style.removeProperty("overflow");
-          target.style.removeProperty("transition-duration");
-          target.style.removeProperty("transition-property");
-        }, duration);
-      };
+    toggleNavMenu: function () {
+      let hamburger = document.querySelector(".navbar .hamburger");
+      let navmenu = document.querySelector(".navbar .nav-menu");
 
-      let slideDown = (target, duration = 500) => {
-        target.style.removeProperty("display");
-        let display = window.getComputedStyle(target).display;
-        if (display === "none") display = "block";
-        target.style.display = display;
-        let height = target.offsetHeight;
-        target.style.overflow = "hidden";
-        target.style.height = 0;
-        target.style.paddingTop = 0;
-        target.style.paddingBottom = 0;
-        target.style.marginTop = 0;
-        target.style.marginBottom = 0;
-        target.offsetHeight;
-        target.style.boxSizing = "border-box";
-        target.style.transitionProperty = "height, margin, padding";
-        target.style.transitionDuration = duration + "ms";
-        target.style.height = height + "px";
-        target.style.removeProperty("padding-top");
-        target.style.removeProperty("padding-bottom");
-        target.style.removeProperty("margin-top");
-        target.style.removeProperty("margin-bottom");
-        window.setTimeout(() => {
-          target.style.removeProperty("height");
-          target.style.removeProperty("overflow");
-          target.style.removeProperty("transition-duration");
-          target.style.removeProperty("transition-property");
-        }, duration);
-      };
-
-      var slideToggle = (target, duration = 500) => {
-        if (window.getComputedStyle(target).display === "none") {
-          e.target.classList.add("active");
-          return slideDown(target, duration);
-        } else {
-          e.target.classList.remove("active");
-          return slideUp(target, duration);
-        }
-      };
-
-      let navmenu = document.querySelector(".nav-menu");
-      slideToggle(navmenu);
+      if(window.getComputedStyle(navmenu).display === "none" && !hamburger.classList.contains("active")) {
+        this.showNavMenu()
+      } else {
+        this.hideNavMenu();
+      }
     },
+    
     scrollNavMenu: function () {
       let navbar = document.querySelector(".navbar");
       let sticky = navbar.offsetTop - 20;
@@ -154,6 +103,82 @@ export default {
       } else {
         navbar.classList.add("floating");
       }
+    },
+    
+    showNavMenu: function() {
+      let hamburger = document.querySelector(".navbar .hamburger");
+      let navmenu = document.querySelector(".navbar .nav-menu");
+      let duration = 500;
+      
+      if(window.getComputedStyle(navmenu).display === "none" && !hamburger.classList.contains("active")) {
+        navmenu.style.removeProperty("display");
+        let display = window.getComputedStyle(navmenu).display;
+        if (display === "none") display = "block";
+        navmenu.style.display = display;
+        let height = navmenu.offsetHeight;
+        navmenu.style.overflow = "hidden";
+        navmenu.style.height = 0;
+        navmenu.style.paddingTop = 0;
+        navmenu.style.paddingBottom = 0;
+        navmenu.style.marginTop = 0;
+        navmenu.style.marginBottom = 0;
+        navmenu.offsetHeight;
+        navmenu.style.boxSizing = "border-box";
+        navmenu.style.transitionProperty = "height, margin, padding";
+        navmenu.style.transitionDuration = duration + "ms";
+        navmenu.style.height = height + "px";
+        navmenu.style.removeProperty("padding-top");
+        navmenu.style.removeProperty("padding-bottom");
+        navmenu.style.removeProperty("margin-top");
+        navmenu.style.removeProperty("margin-bottom");
+        window.setTimeout(() => {
+          navmenu.style.removeProperty("height");
+          navmenu.style.removeProperty("overflow");
+          navmenu.style.removeProperty("transition-duration");
+          navmenu.style.removeProperty("transition-property");
+        }, duration);
+        
+        hamburger.classList.add("active");
+      }
+    },
+    
+    hideNavMenu: function() {
+      let hamburger = document.querySelector(".navbar .hamburger");
+      let navmenu = document.querySelector(".navbar .nav-menu");
+      let duration = 500;
+      
+      if(window.getComputedStyle(navmenu).display !== "none" && hamburger.classList.contains("active")) {
+        navmenu.style.transitionProperty = "height, margin, padding";
+        navmenu.style.transitionDuration = duration + "ms";
+        navmenu.style.boxSizing = "border-box";
+        navmenu.style.height = navmenu.offsetHeight + "px";
+        navmenu.offsetHeight;
+        navmenu.style.overflow = "hidden";
+        navmenu.style.height = 0;
+        navmenu.style.paddingTop = 0;
+        navmenu.style.paddingBottom = 0;
+        navmenu.style.marginTop = 0;
+        navmenu.style.marginBottom = 0;
+        window.setTimeout(() => {
+          navmenu.style.display = "none";
+          navmenu.style.removeProperty("height");
+          navmenu.style.removeProperty("padding-top");
+          navmenu.style.removeProperty("padding-bottom");
+          navmenu.style.removeProperty("margin-top");
+          navmenu.style.removeProperty("margin-bottom");
+          navmenu.style.removeProperty("overflow");
+          navmenu.style.removeProperty("transition-duration");
+          navmenu.style.removeProperty("transition-property");
+        }, duration);
+
+        hamburger.classList.remove("active");
+      }
+    },
+
+    clickOutsideNav: function(e) {
+      if(document.querySelector(".navbar") && (!document.querySelector(".navbar").contains(e.target) || e.target.nodeName === "A")) {
+        this.hideNavMenu();
+      }      
     },
 
     /* Unused below */
