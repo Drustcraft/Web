@@ -797,15 +797,31 @@ ul.dash {
   }  
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (max-width: 769px) {
   #page {
     .container, .page-content {
       margin-top: 4rem;
     }
   }
+  
+  .only-desktop {
+    display: none;
+  }
+  
+  .only-mobile {
+    display: block;
+  }
 }
 
 @media only screen and (min-width: 770px) {
+  .only-desktop {
+    display: block;
+  }
+  
+  .only-mobile {
+    display: none;
+  }
+
   .modal .modal-card {
     .modal-card-foot {
       flex-direction: row;
