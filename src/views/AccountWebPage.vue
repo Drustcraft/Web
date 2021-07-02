@@ -41,8 +41,6 @@
 </template>
 
 <script>
-import { webPost } from "@/common.js";
-
 // import Tiptap from "@/components/Tiptap.vue";
 
 export default {
@@ -60,19 +58,19 @@ export default {
   },
   methods: {
     showPageList() {
-      const loadingComponent = this.$buefy.loading.open({
-        container: this.$el,
-      });
+      // const loadingComponent = this.$buefy.loading.open({
+      //   container: this.$el,
+      // });
 
-      webPost("/admin/page-list", {}, (response) => {
-        loadingComponent.close();
-
-        if (Object.keys(response.errors).length === 0) {
-          this.pages = response.pages;
-        } else {
-          this.errors = response.errors;
-        }
-      });
+      //       webPost("/admin/page-list", {}, (response) => {
+      //         loadingComponent.close();
+      //
+      //         if (Object.keys(response.errors).length === 0) {
+      //           this.pages = response.pages;
+      //         } else {
+      //           this.errors = response.errors;
+      //         }
+      //       });
     },
   },
 };
