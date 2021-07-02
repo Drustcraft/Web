@@ -252,6 +252,10 @@ export default {
       margin-bottom: 1rem;
     }
 
+    .button-group {
+      justify-content: flex-start;
+    }
+
     .button {
       margin-top: 1.5rem;
       margin-bottom: 2rem;
@@ -411,6 +415,10 @@ export default {
     .front-banner {
       position: relative;
       margin: 8rem 0;
+            
+      .button {
+        margin: 0.5rem 0 0.5rem 0;
+      }
     }
 
     .front-news {
