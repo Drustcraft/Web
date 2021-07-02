@@ -2,12 +2,12 @@
   <div :class="['header', { maintenance: this.maintenance.content }]">
     <div v-if="maintenance.content" class="maintenance">
       <template v-if="maintenance.url != ''">
-        <router-link :to="maintenance.url">
-          <i class="far fa-exclamation-triangle"></i>{{ maintenance.content }}
-        </router-link>
+        <span class="only-desktop"><router-link :to="maintenance.url"><i class="far fa-exclamation-triangle"></i>{{maintenance.content}}</router-link></span>
+        <span class="only-mobile"><router-link :to="maintenance.url"><i class="far fa-exclamation-triangle"></i>Important Notice</router-link></span>
       </template>
       <template v-else>
-        <i class="far fa-exclamation-triangle"></i>{{ maintenance.content }}
+        <span class="only-desktop"><i class="far fa-exclamation-triangle"></i>{{maintenance.content}}</span>
+        <span class="only-mobile"><a href="#" @click.prevent="show_maintenance_notice"><i class="far fa-exclamation-triangle"></i>Important Notice</a></span>
       </template>
       <a
         href="#"
@@ -48,6 +48,39 @@ export default {
     closeMaintenanceBar: function () {
       this.maintenance.content = "";
     },
+    
+    show_maintenance_notice: function() {
+      const ModalForm = {
+        props: ['message'],
+        template: `
+          <form action="">
+            <div class="modal-card" style="width: auto">
+              <section class="modal-card-head">
+                <p class="modal-card-title">Important Notice</p>
+              </section>
+              <section class="modal-card-body">
+                <p class="mb-0 is-size-5">{{message}}</p>
+              </section>
+              <footer class="modal-card-foot">
+                <b-button label="Close" @click="$emit('close')" />
+              </footer>
+            </div>
+          </form>
+        `,
+      };
+      
+      let self = this;
+      this.$buefy.modal.open({
+        props: {
+          message: this.maintenance.content,
+        },
+        parent: this,
+        component: ModalForm,
+        hasModalCard: true,
+        trapFocus: true,
+        autoFocus: true,
+      });          
+    },
   },
 };
 </script>
@@ -67,25 +100,26 @@ export default {
     color: #333;
     box-shadow: 0 1px 1px #333;
     font-size: 0.9rem;
+    
+    span {
+      flex: 1;
 
-    .far {
-      margin-right: 0.25rem;
-    }
-
-    a {
-      color: #333;
-
-      &:hover {
-        text-decoration: underline;
+      .far {
+        margin-right: 0.25rem;
+      }
+      
+      .is-pulled-right {
+        justify-content: flex-end;
       }
     }
-    
-    :first-child {
-      flex: 1;
-    }
-    
-    :last-child {
-      justify-content: flex-end;
+  }
+
+  a {
+    color: #333;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 
