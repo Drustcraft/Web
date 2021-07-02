@@ -99,27 +99,29 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .modal-card {
-  min-width: 640px;
   overflow: auto;
 
   .modal-card-head {
-    border-bottom: 1px solid #444;
+    // border-bottom: 1px solid #444;
   }
 
   .modal-card-body {
-    padding: 2rem;
+    // padding: 2rem;
   }
 
   .modal-card-foot {
-    padding-top: 1.5rem;
-    border-top: 1px solid #444;
+    
+    a {
+      // width: 100%;
+    }
   }
 }
 
-@media only screen and (max-width: 770px) {
+@media only screen and (min-width: 770px) {
   .modal-card {
+    min-width: 640px;
     margin: 0 auto !important;
   }
 }
