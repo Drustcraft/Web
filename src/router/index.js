@@ -49,6 +49,12 @@ const routes = [
         meta: { title: "Forums", requiresAuth: false },
       },
       {
+        path: "/stats",
+        component: () =>
+          import(/* webpackChunkName: "stats" */ "../views/Stats.vue"),
+        meta: { title: "Stats", requiresAuth: false },
+      },
+      {
         path: "/wiki",
         component: () =>
           import(/* webpackChunkName: "wiki" */ "../views/Wiki.vue"),
@@ -80,6 +86,16 @@ const routes = [
       location.href = "https://discord.gg/yNzk4x7mpD";
     },
     meta: {
+      requiresAuth: false,
+    },
+  },
+  {
+    path: "/purchase",
+    name: "purchase",
+    component: () =>
+      import(/* webpackChunkName: "purchase" */ "../views/Payment.vue"),
+    meta: {
+      title: "Purchase",
       requiresAuth: false,
     },
   },
