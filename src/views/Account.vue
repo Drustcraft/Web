@@ -27,17 +27,17 @@
         </li>
 
         <li
-          v-if="$store.getters.inAccountGroup('developer')"
+          v-if="$store.getters.inAccountGroup('staff')"
           class="nav-header"
         >
           Site
         </li>
-        <li v-if="$store.getters.inAccountGroup('developer')" class="nav-item">
+        <li v-if="$store.getters.inAccountGroup('staff')" class="nav-item">
           <router-link to="/account/site-warning"
             ><i class="far fa-exclamation-triangle"></i> Warning</router-link
           >
         </li>
-        <li v-if="$store.getters.inAccountGroup('developer')" class="nav-item">
+        <li v-if="$store.getters.inAccountGroup('staff')" class="nav-item">
           <router-link to="/account/site-email"
             ><i class="far fa-exclamation-triangle"></i> Email</router-link
           >
@@ -83,7 +83,7 @@
             ><i class="far fa-cog"></i> Settings</router-link
           >
         </li>
-        <li v-if="$store.getters.inAccountGroup('developer')" class="nav-item">
+        <li v-if="$store.getters.inAccountGroup('staff')" class="nav-item">
           <router-link to="/account/web-forums"
             ><i class="far fa-comments-alt"></i> Forums</router-link
           >
