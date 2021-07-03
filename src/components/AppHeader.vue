@@ -59,7 +59,9 @@ export default {
       .then((response) => {
         this.maintenance = response.data.maintenance;
       })
-      .catch(() => {});
+      .catch((error) => {
+        this.maintenance.content = "Drustcraft is experiencing an unexpected outage";
+      });
   },
   methods: {
     closeMaintenanceBar: function () {
@@ -141,18 +143,6 @@ export default {
 
   .maintenance + .navbar {
     top: 38px;
-  }
-
-  @keyframes flash {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 0.7;
-    }
-    100% {
-      opacity: 0;
-    }
   }
 }
 </style>
