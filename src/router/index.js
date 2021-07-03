@@ -49,10 +49,11 @@ const routes = [
         meta: { title: "Forums", requiresAuth: false },
       },
       {
-        path: "/stats",
+        path: "/leaderboard",
+        alias: ["/stats"],
         component: () =>
-          import(/* webpackChunkName: "stats" */ "../views/Stats.vue"),
-        meta: { title: "Stats", requiresAuth: false },
+          import(/* webpackChunkName: "stats" */ "../views/Leaderboard.vue"),
+        meta: { title: "Leaderboard", requiresAuth: false },
       },
       {
         path: "/wiki",
