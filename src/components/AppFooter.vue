@@ -39,7 +39,7 @@
         <li><router-link to="/rules">Rules</router-link></li>
         <!-- <li><router-link to="/support">Support</router-link></li>
         <li><router-link to="/education">Education</router-link></li> -->
-        <li><router-link to="/stats">Stats</router-link></li>
+        <li><router-link to="/leaderboard">Leaderboard</router-link></li>
         <li><a href="#" @click.prevent="showModalContact">Contact</a></li>
         <li><router-link to="/status">Status</router-link></li>
       </ul>
