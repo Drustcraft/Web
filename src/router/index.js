@@ -50,7 +50,7 @@ const routes = [
       },
       {
         path: "/leaderboard",
-        alias: ["/stats"],
+        alias: ["/stats", "/leaderboards"],
         component: () =>
           import(/* webpackChunkName: "stats" */ "../views/Leaderboard.vue"),
         meta: { title: "Leaderboard", requiresAuth: false },
